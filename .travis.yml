@@ -50,7 +50,8 @@ matrix:
     script:
     - cargo fmt --all -- --check `find src -iname "*.rs"`
     - docker run --security-opt seccomp=unconfined -v "$PWD:/volume" xd009642/tarpaulin
-      cargo tarpaulin --ciserver travis-ci --coveralls $TRAVIS_JOB_ID
+      sh -c "cargo tarpaulin --out Xml"
+    - bash <(curl -s https://codecov.io/bash)
   fast_finish: true
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq; fi
