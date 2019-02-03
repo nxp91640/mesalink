@@ -29,7 +29,10 @@ jobs:
         displayName: setup cross-compile toolchains
       - bash:
           ./ci-scripts/build.sh
-        displayName: build
+        displayName: build the library
+      - bash:
+          ./ci-scripts/pack_tarball.sh
+        displayName: pack the tarballs
       - bash:
           ./ci-scripts/test.sh
-        displayName: test
+        displayName: cargo test and bogo test
