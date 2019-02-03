@@ -17,8 +17,8 @@ else
 fi
 
 make
-make DESTDIR=$TRAVIS_BUILD_DIR/inst install-strip
-du -sh $TRAVIS_BUILD_DIR/inst/usr/local/lib/libmesalink.*
+make DESTDIR=$BUILD_SOURCESDIRECTORY/inst install-strip
+du -sh $BUILD_SOURCESDIRECTORY/inst/usr/local/lib/libmesalink.*
 
 # Only stable x86_64_macos and x86_64_linux builds run tests
 if [[ x"$TARGET" == "x" ]]
