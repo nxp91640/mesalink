@@ -12,21 +12,24 @@ jobs:
         linux_x86_64:
           rust_toolchain: stable
         linux_arm:
-          rust_toolchain: stable 
-          TARGET: "arm-linux-gnueabi"
-          RUST_TARGET: "arm-unknown-linux-gnueabi"
+          rust_toolchain: stable
+          target: "arm-linux-gnueabi"
+          rust_target: "arm-unknown-linux-gnueabi"
         linux_aarch64:
           rust_toolchain: stable
-          TARGET: "aarch64-linux-gnu"
-          RUST_TARGET: "aarch64-unknown-linux-gnu"
+          target: "aarch64-linux-gnu"
+          rust_target: "aarch64-unknown-linux-gnu"
     steps:
       - script: |
           curl -sSf https://sh.rustup.rs | sh -s -- --default-toolchain $RUST_TOOLCHAIN -y
           echo "##vso[task.setvariable variable=PATH;]$PATH:$HOME/.cargo/bin"
         displayName: install rustup
       - bash:
-          ./ci-scripts/install.sh
+          ./ci-scripts/prepare_toolchains.sh
         displayName: setup cross-compile toolchains
-      - bash: 
-          ./ci-scripts/script.sh
-        displayName: build and run tests
+      - bash:
+          ./ci-scripts/build.sh
+        displayName: build
+      - bash:
+          ./ci-scripts/test.sh
+        displayName: test
