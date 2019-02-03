@@ -33,3 +33,4 @@ jobs:
       - bash:
           ./ci-scripts/test.sh
         displayName: cargo test and bogo test
+    server: true
