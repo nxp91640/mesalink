@@ -24,10 +24,6 @@ jobs:
           curl -sSf https://sh.rustup.rs | sh -s -- --default-toolchain $RUST_TOOLCHAIN -y
           echo "##vso[task.setvariable variable=PATH;]$PATH:$HOME/.cargo/bin"
         displayName: install rustup
-      - task: GoTool@0
-        inputs:
-            version: '1.8'
-        displayName: install go for bogo tests
       - bash:
           ./ci-scripts/install.sh
         displayName: setup cross-compile toolchains
